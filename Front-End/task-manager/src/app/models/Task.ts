@@ -12,7 +12,8 @@ export class Task {
         let body = new URLSearchParams();
         body.set('name', this.name);
         body.set('description', this.description);
-        body.set('admin', this.admin.toString());
+        body.set('admin', '1');
+        body.set('id', `${this.id}`);
 
         return body.toString();
     }

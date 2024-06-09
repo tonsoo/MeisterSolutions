@@ -4,6 +4,7 @@ import { API_URL } from '../../../constants/api.contants';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Task } from '../../../models/Task';
 import { RouterModule } from '@angular/router';
+import { config } from 'process';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,16 @@ export class ListTaskComponent {
     this.http.get(`${API_URL}/task/admin/1`, {}).subscribe((r:any) => {
       console.log(`reponse from: '${API_URL}/task/admin/1': `);
       this.tasks = r;
+    });
+  }
+
+  removeTask(id: Number|string){
+    if(!confirm('Are you sure you want to remove this task?')){
+      return;
+    }
+
+    this.http.delete(`${API_URL}/task/remove/${id}`, {}).subscribe((r:any) => {
+      this.updateList();
     });
   }
 

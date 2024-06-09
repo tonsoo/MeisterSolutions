@@ -4,7 +4,7 @@
             <p>Create Task</p>
         </div>
         <div class="flex-row">
-            <button class="update" onclick="updateList()">
+            <button class="update" (click)="updateList()">
                 <p>Update List</p>
             </button>
             <a routerLink='/tasks/create'>
@@ -29,8 +29,11 @@
                     <p>{{ task.status.toString() }}</p>
                     <div class="actions">
                         <a routerLink="/tasks/create/{{ task.id }}" class="image-fit">
-                            <img src="icons/edit.png" alt="Edit task {{ task.name }}" title="Edit task {{ task.name }}">
+                            <img src="icons/edit.png" alt="Edit task {{ task.name }}" title="Edit task '{{ task.name }}'">
                         </a>
+                        <div class="image-fit" (click)="removeTask(task.id)">
+                            <img src="icons/delete.png" alt="Remove task {{ task.name }}" title="Remove task '{{ task.name }}'">
+                        </div>
                     </div>
                 </li>
             }

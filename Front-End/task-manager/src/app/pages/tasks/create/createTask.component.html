@@ -1,10 +1,10 @@
 <div class="container pop-up task">
     <div class="parent">
         <div class="titulo">
-            <p>Create Task</p>
+            <p>{{ id ? 'Update' : 'Create' }} Task</p>
         </div>
         <label class="input-parent">
-            <input class="input" [(ngModel)]="task.name" type="text" name="email">
+            <input class="input" [(ngModel)]="task.name" type="text" name="name">
             <p>Title</p>
         </label>
         <label class="input-parent">
@@ -13,7 +13,7 @@
         </label>
         <div class="flex-row">
             <button type="button" (click)="onSubmit()" routerLink="/tasks/list">
-                <p>Create</p>
+                <p>{{ id ? 'Update' : 'Create' }}</p>
             </button>
             <button class="green" type="button" routerLink="/tasks/list">
                 <p>Go Back</p>

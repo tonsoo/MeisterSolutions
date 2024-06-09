@@ -10,9 +10,10 @@
 .container.task .parent .input-parent .input:not([ng-reflect-model=""]) ~ p,
 .container.task .parent .input-parent:hover p{top: 0;font-size: 11px;color: #000;padding: 5px 10px;border-radius: 3px;background: #fff;box-shadow: 0 0 2px #232323;left: 10px;}
 .container.task .parent a{width: fit-content;display: block;}
-.container.task .parent .task-list .task{display: flex;align-items: stretch;justify-content: space-between;--itens: 5;font: 14.5px "Roboto";color: #212121;}
+.container.task .parent .task-list .task{display: flex;align-items: stretch;justify-content: space-between;--itens: 5;font: 14.5px "Roboto";color: #212121;padding: 10px 0;}
 .container.task .parent .task-list .task:nth-of-type(even){background: #f9f9f9;}
 .container.task .parent .task-list .task:nth-of-type(odd){background: #e8e8e8;}
-.container.task .parent .task-list .task > *{flex: 0 0 auto;width: calc(100% / var(--itens));padding: 10px 15px;box-sizing: border-box;}
+.container.task .parent .task-list .task > *{flex: 0 0 auto;width: calc(100% / var(--itens));padding: 0 15px;box-sizing: border-box;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}
 .container.task .parent .task-list .task .actions{display: flex;align-items: center;justify-content: flex-start;gap: 5px;}
-.container.task .parent .task-list .task .actions > *{width: 15px;height: 15px;flex: 0 0 auto;display: grid;align-items: stretch;}
+.container.task .parent .task-list .task .actions > *{width: 15px;height: 15px;flex: 0 0 auto;display: grid;align-items: stretch;transition: .4s;}
+.container.task .parent .task-list .task .actions > *:hover{cursor: pointer;transform: scale(1.1);}
