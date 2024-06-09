@@ -1,4 +1,4 @@
-package com.meistersolutions.api.models;
+package com.meistersolutions.api.entity;
 
 public enum TaskStatus {
     PENDING,

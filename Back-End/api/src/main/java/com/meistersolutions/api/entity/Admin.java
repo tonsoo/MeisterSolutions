@@ -1,26 +1,35 @@
-package com.meistersolutions.entity;
+package com.meistersolutions.api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Admin {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     private String name;
+
     private String pass;
+    
     private String email;
 
-    public long getId() {
+    @OneToMany(mappedBy="admin", fetch=FetchType.LAZY, orphanRemoval = false)
+    private List<Task> tasks;
+
+    public int getId() {
         return this.id;
     }
 
-    public void setId(long id){
+    public void setId(int id){
         this.id = id;
     }
 
@@ -46,5 +55,13 @@ public class Admin {
 
     public void setEmail(String email){
         this.email = email;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
