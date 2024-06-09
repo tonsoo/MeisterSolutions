@@ -1,0 +1,18 @@
+<div class="container pop-up task">
+    <div class="parent">
+        <div class="titulo">
+            <p>Create Task</p>
+        </div>
+        <label class="input-parent">
+            <input class="input" [(ngModel)]="task.name" type="text" name="email">
+            <p>Title</p>
+        </label>
+        <label class="input-parent">
+            <textarea [(ngModel)]="task.description" name="description"></textarea>
+            <p>Description</p>
+        </label>
+        <button type="button" (click)="onSubmit()">
+            <p>Create</p>
+        </button>
+    </div>
+</div>
