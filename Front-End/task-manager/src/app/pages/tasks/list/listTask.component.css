@@ -1,0 +1,16 @@
+.container.task{background: #efefef;}
+.container.task .parent{background: #fff;box-shadow: 0 0 2px 0 #676767;box-sizing: border-box;padding: 20px;border-radius: 5px;overflow: auto;}
+.container.task .parent .titulo{font: 24px "Roboto";color: #212121;font-weight: 600;text-align: center;margin: 0 0 40px;}
+.container.task .parent .input-parent{position: relative;display: block;margin: 0 0 20px;}
+.container.task .parent .input-parent p{position: absolute;left: 20px;top: 50%;transform: translate(0, -50%);font: 15px "Roboto";color: #343434;transition: .4s;user-select: none;}
+.container.task .parent .input-parent .input{height: 45px;padding: 0 20px;border-radius: 3px;background: none;box-shadow: 0 0 2px 0 #232323;outline: none;border: none;font: 14.5px "Roboto";box-sizing: border-box;width: 100%;}
+.container.task .parent .input-parent .input:focus{outline: 1px solid #1b6df1;}
+.container.task .parent .input-parent .input:focus ~ p{outline: 1px solid #1b6df1;}
+.container.task .parent .input-parent .input:focus ~ p,
+.container.task .parent .input-parent .input:not([ng-reflect-model=""]) ~ p,
+.container.task .parent .input-parent:hover p{top: 0;font-size: 11px;color: #000;padding: 5px 10px;border-radius: 3px;background: #fff;box-shadow: 0 0 2px #232323;left: 10px;}
+.container.task .parent button{height: 45px;padding: 10px 20px;border-radius: 3px;box-shadow: 0 0 2px 0 #343434;font: 14.5px "Roboto";color: #fff;outline: none;border: none;background: #0b57d0;user-select: none;transition: .4s;display: block;margin: 0 0 20px;text-decoration: none;}
+.container.task .parent button.green{background: #12aa2b;}
+.container.task .parent button.green:hover{background: #0a851e;}
+.container.task .parent button:focus{outline: 1px solid #000;}
+.container.task .parent button:hover{cursor: pointer;background: #1b6df1;}

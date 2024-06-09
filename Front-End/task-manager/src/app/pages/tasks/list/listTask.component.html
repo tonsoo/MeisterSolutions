@@ -1,0 +1,33 @@
+<div class="container pop-up task">
+    <div class="parent">
+        <div class="titulo">
+            <p>Create Task</p>
+        </div>
+        <div class="flex-row">
+            <button class="update" onclick="updateList()">
+                <p>Update List</p>
+            </button>
+            <a routerLink='/tasks/create'>
+                <button class="green">
+                    <p>Create Task</p>
+                </button>
+            </a>
+        </div>
+        <ul class="task-list">
+            <header class="task">
+                <p>Title</p>
+                <p>Description</p>
+                <p>Creation Date</p>
+                <p>Status</p>
+            </header>
+            @for (task of tasks; track task){
+                <li class="task">
+                    <p>{{ task.name }}</p>
+                    <p>{{ task.description }}</p>
+                    <p>Creation Date</p>
+                    <p>{{ task.status.toString() }}</p>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

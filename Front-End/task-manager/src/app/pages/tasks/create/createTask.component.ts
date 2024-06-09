@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { API_URL } from '../../../constants/api.contants';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Task } from '../../../models/Task';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, RouterModule],
   templateUrl: './createTask.component.html',
   styleUrl: './createTask.component.css'
 })

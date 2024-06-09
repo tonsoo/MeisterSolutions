@@ -11,7 +11,7 @@
             <textarea [(ngModel)]="task.description" name="description"></textarea>
             <p>Description</p>
         </label>
-        <button type="button" (click)="onSubmit()">
+        <button type="button" (click)="onSubmit()" routerLink="/tasks/list">
             <p>Create</p>
         </button>
     </div>
