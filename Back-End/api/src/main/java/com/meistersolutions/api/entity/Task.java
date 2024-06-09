@@ -1,10 +1,12 @@
 package com.meistersolutions.api.entity;
 
-import java.sql.Date;
+import java.time.Instant;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,10 +32,11 @@ public class Task {
     @JoinColumn(name="admin.id")
     private Admin admin;
 
-    @DateTimeFormat
-    private Date creationDate;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date creationDate = Date.from(Instant.now());
 
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.PENDING;
 
     public int getId() {
         return id;

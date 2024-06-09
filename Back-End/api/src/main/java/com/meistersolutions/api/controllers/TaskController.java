@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Task;
@@ -43,7 +42,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/task/remove/{taskId}")
-    public boolean removeTask(@RequestParam String token, @PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException{
+    public boolean removeTask(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException{
         return taskService.removeTask(taskId);
     }
 }
