@@ -20,13 +20,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.openidentityplatform.openam.auth.modules</groupId>
-			<artifactId>password</artifactId>
-			<version>15.0.0.1</version>
-			<type>war</type>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -48,11 +41,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

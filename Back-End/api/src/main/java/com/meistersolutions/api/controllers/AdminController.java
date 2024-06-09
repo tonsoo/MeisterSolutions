@@ -1,11 +1,9 @@
 package com.meistersolutions.api.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,15 +32,7 @@ public class AdminController {
 
     @GetMapping("/user/login")
     public Admin getAdmins(@RequestParam String email, @RequestParam String password) {
-        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-
-        List<Admin> admins = adminService.getAdminByEmail(email);
-
-        admins = admins.stream().filter(a -> bc.matches(password, a.getPassword())).collect(Collectors.toList());
-
-        if(admins == null){
-            return null;
-        }
+        List<Admin> admins = adminService.getAdminByEmailByPassword(email, password);
 
         return !admins.isEmpty() ? admins.get(0) : null;
     }
@@ -54,6 +44,7 @@ public class AdminController {
 
     @PostMapping("/user/add")
     public Admin addAdmin(Admin admin) {
+        System.out.println("Adding user");
         return adminService.addAdmin(admin);
     }
     

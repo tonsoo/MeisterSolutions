@@ -31,8 +31,8 @@ public class AdminService {
         return !admins.isEmpty() ? admins.get(0) : null;
     }
 
-    public List<Admin> getAdminByEmail(String email){
-        List<Admin> admins = adminRepository.findByEmail(email);
+    public List<Admin> getAdminByEmailByPassword(String email, String password){
+        List<Admin> admins = adminRepository.findByEmailAndPass(email, password);
         if(admins == null){
             return null;
         }
