@@ -31,7 +31,27 @@ public class AdminService {
         return !admins.isEmpty() ? admins.get(0) : null;
     }
 
+    public List<Admin> getAdminByEmail(String email){
+        List<Admin> admins = adminRepository.findByEmail(email);
+        if(admins == null){
+            return null;
+        }
+
+        return admins;
+    }
+
     public Admin addAdmin(Admin admin){
         return adminRepository.save(admin);
+    }
+
+    public boolean removeAdmin(int adminId){
+        adminRepository.deleteById(adminId);
+
+        List<Admin> admins = adminRepository.findById(adminId);
+        if(admins == null){
+            return true;
+        }
+
+        return admins.isEmpty();
     }
 }

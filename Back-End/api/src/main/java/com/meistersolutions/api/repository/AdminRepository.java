@@ -11,4 +11,5 @@ import com.meistersolutions.api.entity.Admin;
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
     List<Admin> findById(int id);
+    List<Admin> findByEmail(String email);
 }

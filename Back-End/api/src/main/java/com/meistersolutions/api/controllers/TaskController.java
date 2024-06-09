@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Task;
@@ -33,8 +35,13 @@ public class TaskController {
         return taskService.getTaskById(taskId);
     }
 
-    @PostMapping("/task")
+    @PostMapping("/task/add")
     public Task addTask(Task task){
         return taskService.addTask(task);
+    }
+
+    @DeleteMapping("/task/remove/{taskId}")
+    public boolean removeTask(@RequestParam String token, @PathVariable(name="taskId",required=true) int taskId){
+        return taskService.removeTask(taskId);
     }
 }

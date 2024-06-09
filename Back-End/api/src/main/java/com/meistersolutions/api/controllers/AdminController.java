@@ -1,17 +1,20 @@
 package com.meistersolutions.api.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Admin;
 import com.meistersolutions.api.services.AdminService;
-
 
 @RestController
 public class AdminController {
@@ -24,9 +27,24 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user/all")
     public List<Admin> getAdmins() {
         return adminService.getAdminList();
+    }
+
+    @GetMapping("/user/login")
+    public Admin getAdmins(@RequestParam String email, @RequestParam String password) {
+        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+
+        List<Admin> admins = adminService.getAdminByEmail(email);
+
+        admins = admins.stream().filter(a -> bc.matches(password, a.getPassword())).collect(Collectors.toList());
+
+        if(admins == null){
+            return null;
+        }
+
+        return !admins.isEmpty() ? admins.get(0) : null;
     }
     
     @GetMapping("/user/{adminId}")
@@ -34,10 +52,14 @@ public class AdminController {
         return adminService.getAdminById(id);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/user/add")
     public Admin addAdmin(Admin admin) {
         return adminService.addAdmin(admin);
     }
     
+    @DeleteMapping("/user/remove/{adminId}")
+    public boolean removeAdmin(@PathVariable(name="adminId",required=true) int adminId) {
+        return adminService.removeAdmin(adminId);
+    }
     
 }

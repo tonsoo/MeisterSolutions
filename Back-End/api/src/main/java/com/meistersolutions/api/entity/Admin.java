@@ -2,6 +2,9 @@ package com.meistersolutions.api.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +25,8 @@ public class Admin {
     
     private String email;
 
-    @OneToMany(mappedBy="admin", fetch=FetchType.LAZY, orphanRemoval = false)
+    @JsonManagedReference
+    @OneToMany(mappedBy="admin",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     private List<Task> tasks;
 
     public int getId() {

@@ -33,4 +33,14 @@ public class TaskService {
     public Task addTask(Task task){
         return taskRepository.save(task);
     }
+
+    public boolean removeTask(int taskId){
+        taskRepository.deleteById(taskId);
+        List<Task> tasks = taskRepository.findById(taskId);
+        if(tasks == null){
+            return true;
+        }
+
+        return tasks.isEmpty();
+    }
 }
