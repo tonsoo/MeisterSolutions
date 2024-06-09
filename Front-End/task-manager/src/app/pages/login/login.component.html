@@ -1,0 +1,18 @@
+<div class="container pop-up login">
+    <div class="parent">
+        <div class="titulo">
+            <p>Login</p>
+        </div>
+        <label class="input-parent">
+            <input class="input" [(ngModel)]="login.email" type="text" name="email">
+            <p>E-mail</p>
+        </label>
+        <label class="input-parent">
+            <input class="input" [(ngModel)]="login.password" type="password" name="password">
+            <p>Senha</p>
+        </label>
+        <button type="button" (click)="onLogin()">
+            <p>Login</p>
+        </button>
+    </div>
+</div>
