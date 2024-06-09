@@ -73,4 +73,12 @@ public class TaskService {
 
         return tasks.isEmpty();
     }
+
+    public TaskRepository getTaskRepository() {
+        return taskRepository;
+    }
+
+    public void setTaskRepository(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 }
