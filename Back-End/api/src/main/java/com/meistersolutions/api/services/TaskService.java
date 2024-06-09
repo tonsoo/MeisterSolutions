@@ -40,12 +40,12 @@ public class TaskService {
 
     public Task addTask(Task task) throws TaskOnWeekDaysException, TaskNotPendingOnAction {
         if(task.getId() != 0){
+            if(task.getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
+        } else {
             LocalDate date = LocalDate.now();
             boolean isWeekend = date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY;
 
             if(isWeekend) throw new TaskOnWeekDaysException();
-
-            if(task.getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
         }
 
         return taskRepository.save(task);
