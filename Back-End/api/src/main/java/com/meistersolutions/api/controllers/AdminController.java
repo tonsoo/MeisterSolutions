@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,8 @@ public class AdminController {
         return adminService.getAdminList();
     }
 
-    @GetMapping("/user/login")
+    @CrossOrigin(origins="*")
+    @PostMapping("/user/login")
     public Admin getAdmins(@RequestParam String email, @RequestParam String password) {
         List<Admin> admins = adminService.getAdminByEmailByPassword(email, password);
 

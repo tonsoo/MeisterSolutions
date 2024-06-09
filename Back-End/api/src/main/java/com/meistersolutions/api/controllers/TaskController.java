@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/task/admin/{adminId}")
     public List<Task> getTasks(@PathVariable(name="adminId",required=true) Integer adminId) {
         return taskService.getTaskByAdmin(adminId);
@@ -37,11 +39,13 @@ public class TaskController {
         return taskService.getTaskById(taskId);
     }
 
+    @CrossOrigin(origins="*")
     @PostMapping("/task/add")
     public Task addTask(Task task) throws TaskOnWeekDaysException, TaskNotPendingOnAction{
         return taskService.addTask(task);
     }
 
+    @CrossOrigin(origins="*")
     @DeleteMapping("/task/remove/{taskId}")
     public boolean removeTask(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction{
         return taskService.removeTask(taskId);
