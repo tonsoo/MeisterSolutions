@@ -23,7 +23,7 @@ public class Task {
     @JoinColumn(name="admin.id")
     private Admin admin;
 
-    // private TaskStatus status;
+    private TaskStatus status;
 
     public int getId() {
         return id;
@@ -55,5 +55,13 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
     }
 }

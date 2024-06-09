@@ -24,7 +24,11 @@ public class AdminService {
 
     public Admin getAdminById(int id){
         List<Admin> admins = adminRepository.findById(id);
-        return admins.size() > 0 ? admins.get(0) : null;
+        if(admins == null){
+            return null;
+        }
+
+        return !admins.isEmpty() ? admins.get(0) : null;
     }
 
     public Admin addAdmin(Admin admin){

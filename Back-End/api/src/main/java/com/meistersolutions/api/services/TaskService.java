@@ -1,30 +1,36 @@
 package com.meistersolutions.api.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.meistersolutions.api.entity.Task;
+import com.meistersolutions.api.repository.TaskRepository;
 
 @Service
 public class TaskService {
 
-    private final List<Task> taskList;
+    @AutoWired
+    private TaskRepository taskRepository;
 
-    public TaskService(){
-        this.taskList = new ArrayList<>();
+    public TaskService(TaskRepository taskRepository){
+        this.taskRepository = taskRepository;
     }
 
-    public List<Task> getTaskList(int userId){
-        return this.taskList.stream().filter(t -> t.getAdmin().getId() == userId).collect(Collectors.toList());
+    public List<Task> getTaskByAdmin(int adminId){
+        return taskRepository.findByAdmin_id(adminId);
     }
 
-    public Optional<Task> getTask(Integer id){
-        return taskList.stream()
-           .filter(task -> task.getId() == id)
-           .findFirst();
+    public Task getTaskById(int taskId){
+        List<Task> tasks = taskRepository.findById(taskId);
+        if(tasks == null){
+            return null;
+        }
+
+        return !tasks.isEmpty() ? tasks.get(0) : null;
+    }
+
+    public Task addTask(Task task){
+        return taskRepository.save(task);
     }
 }
