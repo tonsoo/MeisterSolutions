@@ -39,6 +39,7 @@ public class AdminController {
         return !admins.isEmpty() ? admins.get(0) : null;
     }
     
+    @CrossOrigin(origins="*")
     @GetMapping("/user/{adminId}")
     public Admin getAdmin(@PathVariable(required=true,name="adminId") Integer id) {
         return adminService.getAdminById(id);

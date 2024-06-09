@@ -34,6 +34,7 @@ public class TaskController {
         return taskService.getTaskByAdmin(adminId);
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/task/{taskId}")
     public Task getTask(@PathVariable(name="taskId",required=true) Integer taskId) {
         return taskService.getTaskById(taskId);
