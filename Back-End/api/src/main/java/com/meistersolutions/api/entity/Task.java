@@ -1,5 +1,9 @@
 package com.meistersolutions.api.entity;
 
+import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -25,6 +29,9 @@ public class Task {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="admin.id")
     private Admin admin;
+
+    @DateTimeFormat
+    private Date creationDate;
 
     private TaskStatus status;
 
@@ -66,5 +73,13 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Task;
+import com.meistersolutions.api.exceptions.TaskOnWeekDaysException;
+import com.meistersolutions.api.exceptions.TaskTooYoungToRemoveException;
 import com.meistersolutions.api.services.TaskService;
 
 @RestController
@@ -36,12 +38,12 @@ public class TaskController {
     }
 
     @PostMapping("/task/add")
-    public Task addTask(Task task){
+    public Task addTask(Task task) throws TaskOnWeekDaysException{
         return taskService.addTask(task);
     }
 
     @DeleteMapping("/task/remove/{taskId}")
-    public boolean removeTask(@RequestParam String token, @PathVariable(name="taskId",required=true) int taskId){
+    public boolean removeTask(@RequestParam String token, @PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException{
         return taskService.removeTask(taskId);
     }
 }
