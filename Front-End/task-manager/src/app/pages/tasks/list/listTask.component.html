@@ -14,18 +14,24 @@
             </a>
         </div>
         <ul class="task-list">
-            <header class="task">
+            <li class="task">
                 <p>Title</p>
                 <p>Description</p>
                 <p>Creation Date</p>
                 <p>Status</p>
-            </header>
+                <p>Actions</p>
+            </li>
             @for (task of tasks; track task){
                 <li class="task">
                     <p>{{ task.name }}</p>
                     <p>{{ task.description }}</p>
                     <p>Creation Date</p>
                     <p>{{ task.status.toString() }}</p>
+                    <div class="actions">
+                        <a routerLink="/tasks/create/{{ task.id }}" class="image-fit">
+                            <img src="icons/edit.png" alt="Edit task {{ task.name }}" title="Edit task {{ task.name }}">
+                        </a>
+                    </div>
                 </li>
             }
         </ul>

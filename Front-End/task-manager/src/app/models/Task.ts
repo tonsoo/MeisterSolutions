@@ -1,6 +1,7 @@
 import { TaskStatus } from "./TaskStatus";
 
 export class Task {
+    id: Number = 0;
     name: string = '';
     description: string = '';
     creationDate: Date = new Date();

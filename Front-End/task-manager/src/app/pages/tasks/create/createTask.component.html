@@ -8,11 +8,16 @@
             <p>Title</p>
         </label>
         <label class="input-parent">
-            <textarea [(ngModel)]="task.description" name="description"></textarea>
+            <textarea [(ngModel)]="task.description" name="description" class="input"></textarea>
             <p>Description</p>
         </label>
-        <button type="button" (click)="onSubmit()" routerLink="/tasks/list">
-            <p>Create</p>
-        </button>
+        <div class="flex-row">
+            <button type="button" (click)="onSubmit()" routerLink="/tasks/list">
+                <p>Create</p>
+            </button>
+            <button class="green" type="button" routerLink="/tasks/list">
+                <p>Go Back</p>
+            </button>
+        </div>
     </div>
 </div>

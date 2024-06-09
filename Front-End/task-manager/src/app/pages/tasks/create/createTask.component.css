@@ -4,11 +4,10 @@
 .container.task .parent .input-parent{position: relative;display: block;margin: 0 0 20px;}
 .container.task .parent .input-parent p{position: absolute;left: 20px;top: 50%;transform: translate(0, -50%);font: 15px "Roboto";color: #343434;transition: .4s;user-select: none;}
 .container.task .parent .input-parent .input{height: 45px;padding: 0 20px;border-radius: 3px;background: none;box-shadow: 0 0 2px 0 #232323;outline: none;border: none;font: 14.5px "Roboto";box-sizing: border-box;width: 100%;}
+.container.task .parent .input-parent textarea.input{padding-top: 10px;padding-bottom: 10px;resize: vertical;max-height: 300px;min-height: 100px;}
+.container.task .parent .input-parent textarea.input ~ p{top: 20px;}
 .container.task .parent .input-parent .input:focus{outline: 1px solid #1b6df1;}
 .container.task .parent .input-parent .input:focus ~ p{outline: 1px solid #1b6df1;}
 .container.task .parent .input-parent .input:focus ~ p,
 .container.task .parent .input-parent .input:not([ng-reflect-model=""]) ~ p,
-.container.task .parent .input-parent:hover p{top: 0;font-size: 11px;color: #000;padding: 5px 10px;border-radius: 3px;background: #fff;box-shadow: 0 0 2px #232323;left: 10px;}
-.container.task .parent button{height: 45px;padding: 10px 20px;border-radius: 3px;box-shadow: 0 0 2px 0 #343434;font: 14.5px "Roboto";color: #fff;outline: none;border: none;background: #0b57d0;user-select: none;transition: .4s;float: right;display: block;}
-.container.task .parent button:focus{outline: 1px solid #000;}
-.container.task .parent button:hover{cursor: pointer;background: #1b6df1;}
+.container.task .parent .input-parent:hover p{top: 0 !important;font-size: 11px;color: #000;padding: 5px 10px;border-radius: 3px;background: #fff;box-shadow: 0 0 2px #232323;left: 10px;}

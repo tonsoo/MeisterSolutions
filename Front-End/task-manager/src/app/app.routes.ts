@@ -13,6 +13,10 @@ export const routes: Routes = [
         component: CreateTaskComponent,
     },
     {
+        path: 'tasks/create/:id',
+        component: CreateTaskComponent,
+    },
+    {
         path: 'tasks/list',
         component: ListTaskComponent,
     },
