@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.meistersolutions.api.entity.Task;
 import com.meistersolutions.api.entity.TaskStatus;
-import com.meistersolutions.api.exceptions.TaskNotPendingOnDelete;
+import com.meistersolutions.api.exceptions.TaskNotPendingOnAction;
 import com.meistersolutions.api.exceptions.TaskOnWeekDaysException;
 import com.meistersolutions.api.exceptions.TaskTooYoungToRemoveException;
 import com.meistersolutions.api.repository.TaskRepository;
@@ -38,20 +38,20 @@ public class TaskService {
         return !tasks.isEmpty() ? tasks.get(0) : null;
     }
 
-    public Task addTask(Task task) throws TaskOnWeekDaysException, TaskNotPendingOnDelete {
+    public Task addTask(Task task) throws TaskOnWeekDaysException, TaskNotPendingOnAction {
         if(task.getId() != 0){
             LocalDate date = LocalDate.now();
             boolean isWeekend = date.getDayOfWeek() == DayOfWeek.SATURDAY;
 
             if(isWeekend) throw new TaskOnWeekDaysException();
 
-            if(task.getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnDelete();
+            if(task.getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
         }
 
         return taskRepository.save(task);
     }
 
-    public boolean removeTask(int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnDelete{
+    public boolean removeTask(int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction{
         List<Task> tasks = taskRepository.findById(taskId);
 
         if(tasks != null && !tasks.isEmpty() && tasks.get(0) != null){
@@ -62,7 +62,7 @@ public class TaskService {
             boolean canDelete = minTaskLifespan < now.getTime() - taskCreation.getTime();
             if(!canDelete) throw new TaskTooYoungToRemoveException();
 
-            if(tasks.get(0).getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnDelete();
+            if(tasks.get(0).getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
         }
 
         taskRepository.deleteById(taskId);

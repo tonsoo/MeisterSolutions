@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Task;
+import com.meistersolutions.api.exceptions.TaskNotPendingOnAction;
 import com.meistersolutions.api.exceptions.TaskOnWeekDaysException;
 import com.meistersolutions.api.exceptions.TaskTooYoungToRemoveException;
 import com.meistersolutions.api.services.TaskService;
@@ -37,12 +38,12 @@ public class TaskController {
     }
 
     @PostMapping("/task/add")
-    public Task addTask(Task task) throws TaskOnWeekDaysException{
+    public Task addTask(Task task) throws TaskOnWeekDaysException, TaskNotPendingOnAction{
         return taskService.addTask(task);
     }
 
     @DeleteMapping("/task/remove/{taskId}")
-    public boolean removeTask(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException{
+    public boolean removeTask(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction{
         return taskService.removeTask(taskId);
     }
 }
