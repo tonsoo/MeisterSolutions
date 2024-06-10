@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Task;
@@ -55,7 +54,7 @@ public class TaskController {
     }
 
     @CrossOrigin(origins="*")
-    @PutMapping("/task/update-status/{taskId}")
+    @PostMapping("/task/update-status/{taskId}")
     public Task updateTaskStatus(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction, TaskNotFoundException {
         return taskService.updateTaskStatus(taskId);
     }
