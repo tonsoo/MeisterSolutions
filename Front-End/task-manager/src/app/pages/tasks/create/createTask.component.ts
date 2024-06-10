@@ -35,7 +35,11 @@ export class CreateTaskComponent {
 
   onSubmit(){
 
-    console.log(this.task);
+    if(!this.task.name || !this.task.description){
+      alert('Please fill all fields with (*) to continue');
+      return;
+    }
+
     let str = this.task.toString();
     this.postData(`${API_URL}/task/add`, str, (r:any) => {
       console.log(r);
@@ -50,7 +54,7 @@ export class CreateTaskComponent {
 
     this.http.post(url, body, {
       headers: headers
-    }).subscribe((r:any) => after(r));
+    }).subscribe((r:any) => after(r), (err:any) => alert(err.error.message));
   }
 
   getData(url: string, after: CallableFunction){
@@ -61,6 +65,6 @@ export class CreateTaskComponent {
 
     this.http.get(url, {
       headers: headers
-    }).subscribe((r:any) => after(r));
+    }).subscribe((r:any) => after(r), (err:any) => alert(err.error.message));
   }
 }

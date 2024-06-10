@@ -27,7 +27,7 @@ export class ListTaskComponent {
     this.http.get(`${API_URL}/task/admin/1`, {}).subscribe((r:any) => {
       console.log(`reponse from: '${API_URL}/task/admin/1': `);
       this.tasks = r;
-    });
+    }, (err:any) => alert(err.error.message));
   }
 
   removeTask(id: Number|string){
@@ -37,21 +37,6 @@ export class ListTaskComponent {
 
     this.http.delete(`${API_URL}/task/remove/${id}`, {}).subscribe((r:any) => {
       this.updateList();
-    });
+    }, (err:any) => alert(err.error.message));
   }
-
-  // onSubmit(){
-  //   const url = `${API_URL}/task/add`;
-
-  //   let headers = new HttpHeaders({
-  //       "Content-Type": "application/x-www-form-urlencoded",
-  //       "Accept": "application/json"
-  //   });
-    
-  //   let str = this.task.toString();
-  //   console.log(str);
-  //   this.http.post(url, str, {
-  //       headers: headers
-  //   }).subscribe((r:any) => console.log(r));
-  // }
 }
