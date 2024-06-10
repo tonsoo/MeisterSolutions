@@ -9,7 +9,7 @@ public enum TaskStatus {
 
     public TaskStatus next() {
         int nextVal = this.ordinal() + 1;
-        if(nextVal > vals.length){
+        if(nextVal >= vals.length){
             return vals[vals.length - 1];
         }
 
