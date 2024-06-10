@@ -3,7 +3,7 @@ package com.meistersolutions.api.services;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class TaskService {
             if(task.getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
         } else {
             LocalDate date = LocalDate.now();
-            boolean isWeekend = date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY;
+            boolean isWeekend = date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;
 
             if(isWeekend) throw new TaskOnWeekDaysException();
         }
@@ -55,11 +55,13 @@ public class TaskService {
         List<Task> tasks = taskRepository.findById(taskId);
 
         if(tasks != null && !tasks.isEmpty() && tasks.get(0) != null){
-            Date now = Date.from(Instant.now());
-            Date taskCreation = tasks.get(0).getCreationDate();
+            Instant now = Instant.now();
+            Instant taskCreationInstant = tasks.get(0).getCreationDate().toInstant();
+            
+            long minTaskLifespanInSeconds = 60L * 60L * 24L * 5L;
+            long taskAgeInSeconds = ChronoUnit.SECONDS.between(taskCreationInstant, now);
 
-            int minTaskLifespan = 60 * 60 * 24 * 5; // 60 seconds * 60 minutes * 24 hours * 5 days
-            boolean canDelete = minTaskLifespan < now.getTime() - taskCreation.getTime();
+            boolean canDelete = taskAgeInSeconds > minTaskLifespanInSeconds;
             if(!canDelete) throw new TaskTooYoungToRemoveException();
 
             if(tasks.get(0).getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
