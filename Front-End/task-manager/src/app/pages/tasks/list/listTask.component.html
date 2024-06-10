@@ -34,6 +34,9 @@
                         <div class="image-fit" (click)="removeTask(task.id)">
                             <img src="icons/delete.png" alt="Remove task {{ task.name }}" title="Remove task '{{ task.name }}'">
                         </div>
+                        <div class="image-fit" (click)="updateTaskStatus(task.id)">
+                            <img src="icons/task-status/{{ task.status }}.png" alt="The task is {{ task.status.toString() }}" title="The task is {{ task.status.toString() }}">
+                        </div>
                     </div>
                 </li>
             }

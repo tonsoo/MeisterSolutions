@@ -30,6 +30,13 @@ export class ListTaskComponent {
     }, (err:any) => alert(err.error.message));
   }
 
+  updateTaskStatus(id: Number|string){
+    this.http.post(`${API_URL}/task/update-status/${id}`, {}).subscribe((r:any) => {
+      this.updateList();
+    }, (err:any) => {
+      console.log(err);alert(err.error.message);});
+  }
+
   removeTask(id: Number|string){
     if(!confirm('Are you sure you want to remove this task?')){
       return;

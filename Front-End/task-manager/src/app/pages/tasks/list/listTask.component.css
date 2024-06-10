@@ -17,3 +17,5 @@
 .container.task .parent .task-list .task .actions{display: flex;align-items: center;justify-content: flex-start;gap: 5px;}
 .container.task .parent .task-list .task .actions > *{width: 15px;height: 15px;flex: 0 0 auto;display: grid;align-items: stretch;transition: .4s;}
 .container.task .parent .task-list .task .actions > *:hover{cursor: pointer;transform: scale(1.1);}
+.container.task .parent .task-list .task .actions .task-status{width: auto;font-size: 11px;height: auto;text-align: center;}
+.container.task .parent .task-list .task .actions .task-status .image-fit{width: 15px;margin: 0 auto;}
