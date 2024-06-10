@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meistersolutions.api.entity.Task;
+import com.meistersolutions.api.exceptions.TaskNotFoundException;
 import com.meistersolutions.api.exceptions.TaskNotPendingOnAction;
 import com.meistersolutions.api.exceptions.TaskOnWeekDaysException;
 import com.meistersolutions.api.exceptions.TaskTooYoungToRemoveException;
@@ -48,7 +50,13 @@ public class TaskController {
 
     @CrossOrigin(origins="*")
     @DeleteMapping("/task/remove/{taskId}")
-    public boolean removeTask(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction{
+    public boolean removeTask(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction, TaskNotFoundException {
         return taskService.removeTask(taskId);
+    }
+
+    @CrossOrigin(origins="*")
+    @PutMapping("/task/update-status/{taskId}")
+    public Task updateTaskStatus(@PathVariable(name="taskId",required=true) int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction, TaskNotFoundException {
+        return taskService.updateTaskStatus(taskId);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.meistersolutions.api.entity.Task;
 import com.meistersolutions.api.entity.TaskStatus;
+import com.meistersolutions.api.exceptions.TaskNotFoundException;
 import com.meistersolutions.api.exceptions.TaskNotPendingOnAction;
 import com.meistersolutions.api.exceptions.TaskOnWeekDaysException;
 import com.meistersolutions.api.exceptions.TaskTooYoungToRemoveException;
@@ -51,21 +52,23 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public boolean removeTask(int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction{
+    public boolean removeTask(int taskId) throws TaskTooYoungToRemoveException, TaskNotPendingOnAction, TaskNotFoundException {
         List<Task> tasks = taskRepository.findById(taskId);
 
-        if(tasks != null && !tasks.isEmpty() && tasks.get(0) != null){
-            Instant now = Instant.now();
-            Instant taskCreationInstant = tasks.get(0).getCreationDate().toInstant();
-            
-            long minTaskLifespanInSeconds = 60L * 60L * 24L * 5L;
-            long taskAgeInSeconds = ChronoUnit.SECONDS.between(taskCreationInstant, now);
-
-            boolean canDelete = taskAgeInSeconds > minTaskLifespanInSeconds;
-            if(!canDelete) throw new TaskTooYoungToRemoveException();
-
-            if(tasks.get(0).getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
+        if(tasks == null || tasks.isEmpty() || tasks.get(0) == null){
+            throw new TaskNotFoundException();
         }
+
+        Instant now = Instant.now();
+        Instant taskCreationInstant = tasks.get(0).getCreationDate().toInstant();
+        
+        long minTaskLifespanInSeconds = 60L * 60L * 24L * 5L;
+        long taskAgeInSeconds = ChronoUnit.SECONDS.between(taskCreationInstant, now);
+
+        boolean canDelete = taskAgeInSeconds > minTaskLifespanInSeconds;
+        if(!canDelete) throw new TaskTooYoungToRemoveException();
+
+        if(tasks.get(0).getStatus() != TaskStatus.PENDING) throw new TaskNotPendingOnAction();
 
         taskRepository.deleteById(taskId);
         tasks = taskRepository.findById(taskId);
@@ -74,6 +77,20 @@ public class TaskService {
         }
 
         return tasks.isEmpty();
+    }
+
+    public Task updateTaskStatus(int taskId) throws TaskNotFoundException {
+        List<Task> tasks = taskRepository.findById(taskId);
+        if(tasks == null || tasks.isEmpty() || tasks.get(0) == null){
+            throw new TaskNotFoundException();
+        }
+
+        Task task = tasks.get(0);
+
+        TaskStatus status = task.getStatus();
+        task.setStatus(status.next());
+
+        return taskRepository.save(task);
     }
 
     public TaskRepository getTaskRepository() {
